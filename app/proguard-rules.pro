@@ -1,21 +1,63 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# ============================================================
+# ProGuard rules for House Rental App
+# ============================================================
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Preserve stack traces for crash reporting
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Keep generic signatures for type-safe deserialization
+-keepattributes Signature
+-keepattributes *Annotation*
+-keepattributes EnclosingMethod
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# ── Firebase Realtime Database ────────────────────────────
+# Keep all model classes used for Firebase serialization
+-keep class com.example.houserentalapp.model.** { *; }
+
+# Firebase internal classes
+-keep class com.google.firebase.** { *; }
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.firebase.**
+-dontwarn com.google.android.gms.**
+
+# ── Firebase Auth ─────────────────────────────────────────
+-keep class com.google.firebase.auth.** { *; }
+
+# ── Glide ─────────────────────────────────────────────────
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep class * extends com.bumptech.glide.module.AppGlideModule { <init>(...); }
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+    **[] $VALUES;
+    public *;
+}
+-dontwarn com.bumptech.glide.**
+
+# ── Lottie ────────────────────────────────────────────────
+-dontwarn com.airbnb.lottie.**
+-keep class com.airbnb.lottie.** { *; }
+
+# ── MPAndroidChart ────────────────────────────────────────
+-keep class com.github.mikephil.charting.** { *; }
+
+# ── PhotoView ─────────────────────────────────────────────
+-keep class com.github.chrisbanes.photoview.** { *; }
+
+# ── Shimmer ───────────────────────────────────────────────
+-keep class com.facebook.shimmer.** { *; }
+
+# ── Jetpack Security (EncryptedSharedPreferences) ─────────
+-keep class androidx.security.crypto.** { *; }
+
+# ── Material Components ───────────────────────────────────
+-keep class com.google.android.material.** { *; }
+-dontwarn com.google.android.material.**
+
+# ── General AndroidX ──────────────────────────────────────
+-keep class androidx.** { *; }
+-dontwarn androidx.**
+
+# ── Suppress common warnings ──────────────────────────────
+-dontwarn org.conscrypt.**
+-dontwarn org.bouncycastle.**
+-dontwarn org.openjsse.**

@@ -1,5 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">House Rental App</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">RentEase</string>
+
+    <!-- Auth -->
+    <string name="welcome_to">Welcome To</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email_hint">Email address</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm password</string>
+    <string name="name_hint">Full name</string>
+    <string name="phone_hint">Phone number (optional)</string>
+    <string name="dont_have_account">Don\'t have an account? Sign up</string>
+    <string name="have_account">Already have an account? Login</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="send_reset_link">Send Reset Link</string>
+    <string name="select_role">I am a:</string>
+    <string name="role_tenant">Tenant</string>
+    <string name="role_landlord">Landlord</string>
+    <string name="select_currency">Preferred currency</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_favourites">Favourites</string>
+    <string name="nav_rentals">My Rentals</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_properties">Properties</string>
+    <string name="nav_applications">Applications</string>
+    <string name="nav_payments">Payments</string>
+    <string name="nav_users">Users</string>
+    <string name="nav_listings">Listings</string>
+    <string name="nav_reports">Reports</string>
+    <string name="nav_analytics">Analytics</string>
+
+    <!-- Property -->
+    <string name="per_month">/mo</string>
+    <string name="bedrooms">Bedrooms</string>
+    <string name="bathrooms">Bathrooms</string>
+    <string name="area_sqft">sq ft</string>
+    <string name="deposit">Deposit</string>
+    <string name="available_from">Available from</string>
+    <string name="property_details">Property Details</string>
+    <string name="amenities">Amenities</string>
+    <string name="description">Description</string>
+    <string name="landlord_info">Landlord Info</string>
+    <string name="save_property">Save</string>
+    <string name="contact_landlord">Contact</string>
+    <string name="schedule_visit">Schedule Visit</string>
+    <string name="apply_now">Apply Now</string>
+    <string name="write_review">Write a Review</string>
+    <string name="report_listing">Report Listing</string>
+    <string name="view_on_map">View on Map</string>
+
+    <!-- Filters / Search -->
+    <string name="search_hint">Search properties, cities…</string>
+    <string name="filters">Filters</string>
+    <string name="apply_filters">Apply Filters</string>
+    <string name="clear_filters">Clear</string>
+    <string name="sort_by">Sort by</string>
+    <string name="min_price">Min price</string>
+    <string name="max_price">Max price</string>
+    <string name="property_type">Property Type</string>
+    <string name="furnished_status">Furnished Status</string>
+
+    <!-- Status Labels -->
+    <string name="status_pending">Pending</string>
+    <string name="status_confirmed">Confirmed</string>
+    <string name="status_rejected">Rejected</string>
+    <string name="status_accepted">Accepted</string>
+    <string name="status_active">Active</string>
+    <string name="status_expired">Expired</string>
+    <string name="status_paid">Paid</string>
+    <string name="status_overdue">Overdue</string>
+    <string name="status_due">Due</string>
+    <string name="status_open">Open</string>
+    <string name="status_resolved">Resolved</string>
+    <string name="status_in_progress">In Progress</string>
+
+    <!-- Empty States -->
+    <string name="empty_properties">No properties found</string>
+    <string name="empty_favourites">No saved properties yet</string>
+    <string name="empty_applications">No applications yet</string>
+    <string name="empty_leases">No active leases</string>
+    <string name="empty_payments">No payment records</string>
+    <string name="empty_maintenance">No maintenance requests</string>
+    <string name="empty_messages">No conversations yet</string>
+    <string name="empty_notifications">No notifications</string>
+    <string name="empty_reviews">No reviews yet</string>
+
+    <!-- Actions -->
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="mark_as_paid">Mark as Paid</string>
+
+    <!-- Maintenance Categories -->
+    <string name="cat_plumbing">Plumbing</string>
+    <string name="cat_electrical">Electrical</string>
+    <string name="cat_appliance">Appliance</string>
+    <string name="cat_structural">Structural</string>
+    <string name="cat_cleaning">Cleaning</string>
+    <string name="cat_other">Other</string>
+
+    <!-- AI Assistant -->
+    <string name="ai_assistant">AI Assistant</string>
+    <string name="ai_hint">Ask me about renting…</string>
 </resources>

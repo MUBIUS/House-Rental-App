@@ -13,3 +13,13 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# ── Sensitive Firebase config — DO NOT COMMIT ──────────────
+# Add your google-services.json via CI/CD secrets or manually per-developer.
+google-services.json
+app/google-services.json
+
+# ── Signing keys — NEVER commit keystores ──────────────────
+*.keystore
+*.jks
+keystore.properties

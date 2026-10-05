@@ -5,55 +5,92 @@ plugins {
 
 android {
     namespace 'com.example.houserentalapp'
-    compileSdk 33
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.example.houserentalapp"
-        minSdk 22
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        minSdk 23
+        targetSdk 35
+        versionCode 2
+        versionName "2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    sourceSets {
-        main {
-            res {
-                srcDirs 'src\\main\\res', 'src\\main\\res\\2'
-            }
-        }
+    buildFeatures {
+        viewBinding true
+        buildConfig true
     }
 }
 
 dependencies {
-
+    // AndroidX Core
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.firebase:firebase-auth:21.3.0'
-    implementation 'com.google.firebase:firebase-database:20.2.0'
-    implementation 'com.google.firebase:firebase-storage:20.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'androidx.core:core:1.13.1'
+    implementation 'androidx.preference:preference:1.2.1'
 
+    // Jetpack Security (EncryptedSharedPreferences)
+    implementation 'androidx.security:security-crypto:1.1.0-alpha06'
+
+    // Material Design
+    implementation 'com.google.android.material:material:1.11.0'
+
+    // Firebase BoM — manages all Firebase versions consistently
+    implementation platform('com.google.firebase:firebase-bom:33.6.0')
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.firebase:firebase-messaging'
+
+    // Google Sign-In & Maps
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    // Image loading
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+
+    // Circle ImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // Lottie animations
+    implementation 'com.airbnb.android:lottie:6.4.0'
+
+    // Shimmer loading effect
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    // Analytics charts
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // Image zoom/pinch
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    // Scalable size units
+    implementation 'com.intuit.sdp:sdp-android:1.1.1'
+    implementation 'com.intuit.ssp:ssp-android:1.1.1'
+
+    // Testing
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-
-    implementation "com.airbnb.android:lottie:3.4.0"
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.github.bumptech.glide:glide:4.15.0'
-    implementation "com.airbnb.android:lottie:3.4.0"
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
-
-    implementation 'com.google.android.gms:play-services-auth:20.5.0'
 }

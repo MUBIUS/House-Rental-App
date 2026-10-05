@@ -5,37 +5,36 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE"/>
 
+    <!-- Image picker permissions: READ_MEDIA_IMAGES for Android 13+ (API 33+) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"
+        android:minSdkVersion="33" />
+    <!-- Fallback for Android 12 and below -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
     <application
-        android:allowBackup="true"
+        android:name=".RentalApp"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/Theme.HouseRentalApp"
-        tools:targetApi="31">
-        <activity
-            android:name=".screens.FilteredActivity"
-            android:exported="false" />
-        <activity
-            android:name=".screens.AddActivity"
-            android:exported="true" />
-        <activity
-            android:name=".screens.OTPVerificationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".screens.DetailsActivity"
-            android:exported="false"
-            android:parentActivityName=".screens.HomeActivity" />
-        <activity
-            android:name=".screens.HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".screens.SignUpActivity"
-            android:exported="false" />
-        <activity
-            android:name=".screens.LoginActivity"
-            android:exported="false" />
+        tools:targetApi="35">
+        <!-- Auth Screens -->
+        <activity android:name=".screens.auth.LoginActivity" android:exported="false" />
+        <activity android:name=".screens.auth.SignUpActivity" android:exported="false" />
+        <activity android:name=".screens.auth.ForgotPasswordActivity" android:exported="false" />
+
+        <!-- Tenant Screens -->
+        <activity android:name=".screens.tenant.TenantHomeActivity" android:exported="false" />
+        <activity android:name=".screens.tenant.PropertyDetailActivity" android:exported="false" />
+
+        <!-- Landlord & Admin Screens -->
+        <activity android:name=".screens.landlord.LandlordHomeActivity" android:exported="false" />
+        <activity android:name=".screens.admin.AdminHomeActivity" android:exported="false" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">

@@ -2,7 +2,8 @@
   "project_info": {
     "project_number": "793595194958",
     "project_id": "rentalhome-89654",
-    "storage_bucket": "rentalhome-89654.appspot.com"
+    "storage_bucket": "rentalhome-89654.appspot.com",
+    "firebase_url": "https://rentalhome-89654-default-rtdb.firebaseio.com"
   },
   "client": [
     {
