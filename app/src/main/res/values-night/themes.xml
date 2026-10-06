@@ -1,18 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Dark Mode Theme -->
     <style name="Theme.HouseRentalApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">#01AED8</item>
-        <item name="colorPrimaryVariant">#0190B5</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="colorOnPrimary">#FFFFFF</item>
-        <item name="colorSecondary">#F4A261</item>
+        <item name="colorSecondary">@color/dark_orange</item>
         <item name="colorOnSecondary">#000000</item>
-        <item name="colorSurface">#1E1E1E</item>
-        <item name="colorOnSurface">#EFEFEF</item>
-        <item name="android:colorBackground">#121212</item>
-        <item name="colorOnBackground">@color/white</item>
-        <item name="android:statusBarColor">#1E1E1E</item>
-        <item name="android:windowBackground">#121212</item>
-        <item name="android:textColor">#EFEFEF</item>
-        <item name="civ_border_color">#01AED8</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="android:colorBackground">@color/surface_variant</item>
+        <item name="colorOnBackground">@color/on_surface</item>
+        <item name="android:statusBarColor">@color/surface</item>
+        <item name="android:windowBackground">@color/surface_variant</item>
+        <item name="android:textColor">@color/on_surface</item>
+        <item name="civ_border_color">@color/primary</item>
+
+        <!-- Widget styles -->
+        <item name="bottomNavigationStyle">@style/Widget.RentalApp.BottomNavigation</item>
+        <item name="materialCardViewStyle">@style/Widget.RentalApp.Card</item>
+        <item name="editTextStyle">@style/Widget.RentalApp.EditText</item>
     </style>
 </resources>

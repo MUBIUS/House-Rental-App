@@ -56,4 +56,10 @@ public class TenantHomeActivity extends AppCompatActivity {
             bottomNavigationView.setSelectedItemId(R.id.nav_home);
         }
     }
+
+    public void switchToSearchTab() {
+        if (bottomNavigationView != null) {
+            bottomNavigationView.setSelectedItemId(R.id.nav_search);
+        }
+    }
 }

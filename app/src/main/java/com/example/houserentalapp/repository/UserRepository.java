@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import com.example.houserentalapp.model.User;
 import com.example.houserentalapp.utils.Constants;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,6 +57,55 @@ public class UserRepository {
                 callback.onFailure(task.getException() != null ? task.getException().getMessage() : "Unknown error");
             }
         });
+    }
+
+    /**
+     * Fetches user profile or automatically creates a fallback profile if missing in DB.
+     */
+    public void getOrCreateUser(FirebaseUser firebaseUser, UserCallback callback) {
+        if (firebaseUser == null || firebaseUser.getUid() == null) {
+            callback.onFailure("User is null");
+            return;
+        }
+        String uid = firebaseUser.getUid();
+        usersRef.child(uid).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DataSnapshot snapshot = task.getResult();
+                User user = snapshot.getValue(User.class);
+                if (user != null) {
+                    user.setUid(snapshot.getKey());
+                    callback.onSuccess(user);
+                } else {
+                    // Profile missing in DB — create fallback profile
+                    User fallbackUser = createFallbackUser(firebaseUser);
+                    usersRef.child(uid).setValue(fallbackUser).addOnCompleteListener(saveTask -> {
+                        if (saveTask.isSuccessful()) {
+                            callback.onSuccess(fallbackUser);
+                        } else {
+                            String err = saveTask.getException() != null ? saveTask.getException().getMessage() : "Failed to create user profile";
+                            callback.onFailure("Profile missing in database and auto-creation failed: " + err);
+                        }
+                    });
+                }
+            } else {
+                String err = task.getException() != null ? task.getException().getMessage() : "Unknown database error";
+                callback.onFailure(err);
+            }
+        });
+    }
+
+    private User createFallbackUser(FirebaseUser firebaseUser) {
+        String email = firebaseUser.getEmail() != null ? firebaseUser.getEmail() : "";
+        String name = firebaseUser.getDisplayName();
+        if (name == null || name.trim().isEmpty()) {
+            if (email.contains("@")) {
+                name = email.substring(0, email.indexOf("@"));
+            } else {
+                name = "User";
+            }
+        }
+        String phone = firebaseUser.getPhoneNumber() != null ? firebaseUser.getPhoneNumber() : "";
+        return new User(firebaseUser.getUid(), name, email, phone, Constants.ROLE_TENANT);
     }
 
     /**

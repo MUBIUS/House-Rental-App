@@ -1,9 +1,12 @@
 package com.example.houserentalapp.model;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 import java.util.ArrayList;
 import java.util.List;
 
+@IgnoreExtraProperties
 public class Property {
     private String id;
     private String landlordId;
@@ -74,6 +77,7 @@ public class Property {
     public String getState() { return state; }
     public void setState(String state) { this.state = state; }
 
+    @Exclude
     public String getFullLocation() {
         if (address == null || address.isEmpty()) {
             return city;

@@ -25,6 +25,7 @@ import com.example.houserentalapp.model.Property;
 import com.example.houserentalapp.repository.FavouriteRepository;
 import com.example.houserentalapp.repository.PropertyRepository;
 import com.example.houserentalapp.screens.tenant.PropertyDetailActivity;
+import com.example.houserentalapp.screens.tenant.TenantHomeActivity;
 import com.example.houserentalapp.utils.Constants;
 import com.example.houserentalapp.utils.ImageUtils;
 import com.example.houserentalapp.utils.SessionManager;
@@ -112,9 +113,12 @@ public class HomeFragment extends Fragment implements PropertyCardAdapter.OnProp
     }
 
     private void setupCategories() {
+        if (!isAdded() || getContext() == null) return;
         String[] types = {Constants.TYPE_HOME, Constants.TYPE_FLAT, Constants.TYPE_ROOM, Constants.TYPE_STUDIO, Constants.TYPE_VILLA};
+        chipGroupCategories.removeAllViews();
         for (String type : types) {
             Chip chip = new Chip(requireContext());
+            chip.setId(View.generateViewId());
             chip.setText(type);
             chip.setCheckable(true);
             chipGroupCategories.addView(chip);
@@ -122,14 +126,26 @@ public class HomeFragment extends Fragment implements PropertyCardAdapter.OnProp
     }
 
     private void setListeners() {
+        if (searchBarTrigger != null) {
+            searchBarTrigger.setOnClickListener(v -> {
+                if (getActivity() instanceof TenantHomeActivity) {
+                    ((TenantHomeActivity) getActivity()).switchToSearchTab();
+                }
+            });
+        }
         swipeRefresh.setOnRefreshListener(this::loadData);
         chipGroupCategories.setOnCheckedStateChangeListener((group, checkedIds) -> {
-            if (checkedIds.isEmpty()) {
+            if (checkedIds == null || checkedIds.isEmpty()) {
                 mainAdapter.updateData(allPropertiesList);
                 checkEmptyState(allPropertiesList.isEmpty());
             } else {
                 Chip chip = group.findViewById(checkedIds.get(0));
-                filterByType(chip.getText().toString());
+                if (chip != null && chip.getText() != null) {
+                    filterByType(chip.getText().toString());
+                } else {
+                    mainAdapter.updateData(allPropertiesList);
+                    checkEmptyState(allPropertiesList.isEmpty());
+                }
             }
         });
     }

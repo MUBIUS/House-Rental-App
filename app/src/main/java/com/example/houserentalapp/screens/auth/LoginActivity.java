@@ -105,8 +105,8 @@ public class LoginActivity extends AppCompatActivity {
         authRepository.login(email, password, new AuthRepository.AuthCallback() {
             @Override
             public void onSuccess(FirebaseUser user) {
-                // Fetch full user profile to get role
-                userRepository.getUser(user.getUid(), new UserRepository.UserCallback() {
+                // Fetch full user profile to get role (creates profile if missing in DB)
+                userRepository.getOrCreateUser(user, new UserRepository.UserCallback() {
                     @Override
                     public void onSuccess(User userProfile) {
                         setLoading(false);
@@ -127,10 +127,10 @@ public class LoginActivity extends AppCompatActivity {
                     public void onFailure(String errorMessage) {
                         setLoading(false);
                         // Profile fetch failed — do NOT silently grant access.
-                        // Sign out and ask the user to try again.
+                        // Sign out and show exact failure message.
                         authRepository.signOut();
                         Toast.makeText(LoginActivity.this,
-                                "Could not load your profile. Please check your connection and try again.",
+                                "Could not load profile: " + errorMessage,
                                 Toast.LENGTH_LONG).show();
                     }
                 });

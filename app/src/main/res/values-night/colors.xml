@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand Colors for Dark Mode -->
+    <color name="primary">#01AED8</color>
+    <color name="primary_dark">#017FA0</color>
+    <color name="primary_light">#1A4050</color>
+    <color name="primary_variant">#0190B5</color>
+
+    <!-- Accent / Secondary -->
+    <color name="dark_orange">#F4A261</color>
+    <color name="orange_light">#E76F51</color>
+    <color name="orange_surface">#2D1F18</color>
+
+    <!-- Neutrals (Inverted for Dark Mode) -->
+    <color name="black">#FFFFFFFF</color>
+    <color name="white">#FF1E1E1E</color>
+    <color name="light_grey">#2A2C30</color>
+    <color name="dark_grey">#9DA0A2</color>
+    <color name="grey_50">#121212</color>
+    <color name="grey_100">#1E1E1E</color>
+    <color name="grey_200">#282828</color>
+    <color name="grey_300">#383838</color>
+    <color name="grey_700">#E0E0E0</color>
+    <color name="grey_900">#F5F5F5</color>
+
+    <!-- Surface / Background for Dark Mode -->
+    <color name="surface">#1E1E1E</color>
+    <color name="surface_variant">#121212</color>
+    <color name="on_surface">#EFEFEF</color>
+    <color name="on_surface_secondary">#B0B0B0</color>
+    <color name="divider">#2C2C2C</color>
+
+    <!-- Status Colors -->
+    <color name="status_pending">#FFB74D</color>
+    <color name="status_pending_bg">#3E2723</color>
+    <color name="status_confirmed">#81C784</color>
+    <color name="status_confirmed_bg">#1B5E20</color>
+    <color name="status_rejected">#E57373</color>
+    <color name="status_rejected_bg">#B71C1C</color>
+    <color name="status_active">#64B5F6</color>
+    <color name="status_active_bg">#0D47A1</color>
+
+    <!-- Chat Bubble Colors -->
+    <color name="bubble_sent">#01AED8</color>
+    <color name="bubble_received">#2A2C30</color>
+    <color name="bubble_sent_text">#FFFFFF</color>
+    <color name="bubble_received_text">#EFEFEF</color>
+
+    <!-- Shimmer -->
+    <color name="shimmer_base">#2A2A2A</color>
+    <color name="shimmer_highlight">#383838</color>
+</resources>

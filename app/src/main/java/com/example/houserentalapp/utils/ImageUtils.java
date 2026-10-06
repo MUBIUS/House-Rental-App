@@ -1,5 +1,6 @@
 package com.example.houserentalapp.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
@@ -13,8 +14,18 @@ import com.example.houserentalapp.R;
 
 public class ImageUtils {
 
+    private static boolean isValidContext(Context ctx) {
+        if (ctx == null) return false;
+        if (ctx instanceof Activity) {
+            Activity act = (Activity) ctx;
+            return !act.isFinishing() && !act.isDestroyed();
+        }
+        return true;
+    }
+
     /** Load a property image with center-crop and shimmer placeholder */
     public static void loadPropertyImage(Context ctx, String url, ImageView target) {
+        if (!isValidContext(ctx) || target == null) return;
         Glide.with(ctx)
                 .load(url)
                 .apply(new RequestOptions()
@@ -27,6 +38,7 @@ public class ImageUtils {
 
     /** Load a circular profile avatar */
     public static void loadAvatar(Context ctx, String url, ImageView target) {
+        if (!isValidContext(ctx) || target == null) return;
         Glide.with(ctx)
                 .load(url)
                 .apply(new RequestOptions()
@@ -39,6 +51,7 @@ public class ImageUtils {
 
     /** Load a thumbnail for cards */
     public static void loadThumbnail(Context ctx, String url, ImageView target) {
+        if (!isValidContext(ctx) || target == null) return;
         Glide.with(ctx)
                 .load(url)
                 .thumbnail(0.25f)
@@ -53,6 +66,7 @@ public class ImageUtils {
     /** Load with a specific placeholder drawable resource */
     public static void loadWithPlaceholder(Context ctx, String url, ImageView target,
                                             @DrawableRes int placeholder) {
+        if (!isValidContext(ctx) || target == null) return;
         Glide.with(ctx)
                 .load(url)
                 .apply(new RequestOptions()

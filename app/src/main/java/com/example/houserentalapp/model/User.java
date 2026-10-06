@@ -1,5 +1,9 @@
 package com.example.houserentalapp.model;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
+@IgnoreExtraProperties
 public class User {
 
     private String uid;
@@ -40,6 +44,7 @@ public class User {
     public void setName(String name) { this.name = name; }
 
     // Legacy alias kept for compatibility with existing code
+    @Exclude
     public String getname() { return name; }
 
     public String getEmail() { return email; }
@@ -55,7 +60,9 @@ public class User {
     public void setProfileImage(String profileImage) { this.profileImage = profileImage; }
 
     // Legacy alias
+    @Exclude
     public String getImage() { return profileImage; }
+    @Exclude
     public void setImage(String image) { this.profileImage = image; }
 
     public String getBio() { return bio; }

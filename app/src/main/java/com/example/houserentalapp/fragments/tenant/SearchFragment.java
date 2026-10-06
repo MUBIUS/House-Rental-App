@@ -86,14 +86,20 @@ public class SearchFragment extends Fragment implements PropertyCardAdapter.OnPr
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
                 ivClear.setVisibility(s.length() > 0 ? View.VISIBLE : View.GONE);
-                if (s.length() == 0) {
+                String query = s.toString().trim();
+                if (query.isEmpty()) {
                     showInitialState();
+                } else {
+                    performSearch(query);
                 }
             }
             @Override public void afterTextChanged(Editable s) {}
         });
 
-        ivClear.setOnClickListener(v -> etSearch.setText(""));
+        ivClear.setOnClickListener(v -> {
+            etSearch.setText("");
+            showInitialState();
+        });
 
         etSearch.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -106,7 +112,6 @@ public class SearchFragment extends Fragment implements PropertyCardAdapter.OnPr
         btnFilter.setOnClickListener(v -> {
             FilterBottomSheet filterSheet = new FilterBottomSheet();
             filterSheet.setFilterListener((type, minPrice, maxPrice, beds, furnished) -> {
-                // Apply filters to search results
                 applyFilters(type, minPrice, maxPrice, beds, furnished);
             });
             filterSheet.show(getChildFragmentManager(), "FilterBottomSheet");
@@ -121,14 +126,15 @@ public class SearchFragment extends Fragment implements PropertyCardAdapter.OnPr
                 if (!isAdded() || getContext() == null) return;
                 searchResults.clear();
                 for (Property p : properties) {
+                    if (p == null) continue;
                     boolean match = true;
-                    if (type != null && !type.equals(p.getPropertyType())) match = false;
+                    if (type != null && !type.equalsIgnoreCase(p.getPropertyType())) match = false;
                     if (p.getPrice() < minPrice || p.getPrice() > maxPrice) match = false;
                     if (beds != null) {
                         if (beds.equals("4+") && p.getBedrooms() < 4) match = false;
                         else if (!beds.equals("4+") && p.getBedrooms() != Integer.parseInt(beds)) match = false;
                     }
-                    if (furnished != null && !furnished.equals(p.getFurnished())) match = false;
+                    if (furnished != null && !furnished.equalsIgnoreCase(p.getFurnished())) match = false;
 
                     if (match) searchResults.add(p);
                 }
@@ -144,21 +150,29 @@ public class SearchFragment extends Fragment implements PropertyCardAdapter.OnPr
     }
 
     private void performSearch(String query) {
-        if (query.isEmpty()) return;
+        if (query == null || query.trim().isEmpty()) {
+            showInitialState();
+            return;
+        }
 
         showLoading();
-        // Client-side simple search implementation
         propertyRepository.getActiveProperties(new PropertyRepository.PropertyListCallback() {
             @Override
             public void onSuccess(List<Property> properties) {
                 if (!isAdded() || getContext() == null) return;
                 searchResults.clear();
-                String lowerQuery = query.toLowerCase();
+                String lowerQuery = query.trim().toLowerCase();
 
                 for (Property p : properties) {
-                    if ((p.getTitle() != null && p.getTitle().toLowerCase().contains(lowerQuery)) ||
-                        (p.getCity() != null && p.getCity().toLowerCase().contains(lowerQuery)) ||
-                        (p.getFullLocation() != null && p.getFullLocation().toLowerCase().contains(lowerQuery))) {
+                    if (p == null) continue;
+                    boolean matchesTitle = p.getTitle() != null && p.getTitle().toLowerCase().contains(lowerQuery);
+                    boolean matchesCity = p.getCity() != null && p.getCity().toLowerCase().contains(lowerQuery);
+                    boolean matchesLocation = p.getFullLocation() != null && p.getFullLocation().toLowerCase().contains(lowerQuery);
+                    boolean matchesAddress = p.getAddress() != null && p.getAddress().toLowerCase().contains(lowerQuery);
+                    boolean matchesType = p.getPropertyType() != null && p.getPropertyType().toLowerCase().contains(lowerQuery);
+                    boolean matchesDesc = p.getDescription() != null && p.getDescription().toLowerCase().contains(lowerQuery);
+
+                    if (matchesTitle || matchesCity || matchesLocation || matchesAddress || matchesType || matchesDesc) {
                         searchResults.add(p);
                     }
                 }

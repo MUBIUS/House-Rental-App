@@ -51,7 +51,7 @@ public class SplashActivity extends AppCompatActivity {
                         }
                     }, 5000); // 5 second timeout
 
-                    new UserRepository().getUser(firebaseUser.getUid(), new UserRepository.UserCallback() {
+                    new UserRepository().getOrCreateUser(firebaseUser, new UserRepository.UserCallback() {
                         @Override
                         public void onSuccess(User user) {
                             if (!handled[0]) {
